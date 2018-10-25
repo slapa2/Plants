@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div>
+        <form method="post" action="{{ url_for('auth.register') }}">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>Rejestracja</legend>
+                <div>
+                    {{ form.email.label }}
+                    {% if form.email.errors %}
+                        <div style="color: red">
+                            {% for error in form.email.errors  %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {{ form.email }}
+                </div>
+                <div>
+                    {{ form.password.label }}
+                    {% if form.password.errors %}
+                        <div style="color: red">
+                            {% for error in form.password.errors  %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {{ form.password }}
+                </div>
+                <div>
+                    {{ form.confirm.label }}
+                    {% if form.confirm.errors %}
+                        <div style="color: red">
+                            {% for error in form.confirm.errors  %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {{ form.confirm }}
+                </div>
+                <div>
+                    {{ form.submit }}
+                </div>
+            </fieldset>
+
+        </form>
+    </div>
+    <div>
+        <small>
+            Jeśli masz już konto <a href="{{ url_for('auth.login') }}">zaloguj się</a>
+        </small>
+    </div>
+
+
+{% endblock content %}

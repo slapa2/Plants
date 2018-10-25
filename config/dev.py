@@ -1,2 +1,2 @@
 DEBUG = True
-SECURE_KEY = 'topsecret'
+SECRET_KEY = 'topsecret'

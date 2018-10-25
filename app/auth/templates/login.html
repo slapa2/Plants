@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div>
+        <form method="post" action="{{ url_for('auth.login') }}">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>Logowanie</legend>
+                <div>
+                    {{ form.email.label }}
+                    {% if form.email.errors %}
+                        <div style="color: red">
+                            {% for error in form.email.errors  %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {{ form.email }}
+                </div>
+                <div>
+                    {{ form.password.label }}
+                    {% if form.password.errors %}
+                        <div style="color: red">
+                            {% for error in form.password.errors  %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {{ form.password }}
+                </div>
+                <div>
+                    {{ form.stay_loggedin.label }}
+                    {% if form.stay_loggedin.errors %}
+                        <div style="color: red">
+                            {% for error in form.stay_loggedin.errors  %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {{ form.stay_loggedin }}
+                </div>
+                <div>
+                    {{ form.submit }}
+                </div>
+                <small>
+                    <a href="#">Nie pamiętasz hasła? </a>
+                </small>
+            </fieldset>
+
+        </form>
+    </div>
+    <div>
+
+        <small>
+            Jeśli nie masz konta <a href="{{ url_for('auth.register') }}">zarejestruj się</a>
+        </small>
+    </div>
+
+
+{% endblock content %}

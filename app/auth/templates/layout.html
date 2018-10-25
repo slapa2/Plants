@@ -1,34 +1,41 @@
-{% import "bootstrap/wtf.html" as wtf %}
-
 <!DOCTYPE html>
-<html lang="pl">
-{% block head %}
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Sansita" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <meta charset="utf-8">
+
+    {% if title %}
+        <title>Plants - {{ title }}</title>
+    {% else %}
+        <title>Plants</title>
+    {% endif %}
 </head>
-{% endblock head %}
-
-{% block body %}
 <body>
-<div class="wraper">
-    {% block navbar %}
-        <nav>
+    <header>
+      <nav>
+        <div>
+          <a href="{{ url_for('auth.landing') }}">Home</a>
+        </div>
 
-        </nav>
-    {% endblock navbar %}
-
-    {% block content%}
-    {% endblock content %}
-
-    {% block footer %}
-        <footer>
-        </footer>
-    {% endblock footer %}
-</div>
+        <div>
+          <a href="{{ url_for('auth.login') }}">Logowanie</a>
+          <a href="{{ url_for('auth.register') }}">Rejestracja</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true)  %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock content%}
+    </main>
+    <footer>
+        Sławek :)
+    </footer>
 </body>
-{% endblock %}
 </html>

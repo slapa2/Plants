@@ -8,9 +8,8 @@ def create_app(config_type): # dev, test, prod
     configuration = os.path.join(os.getcwd(), 'config', config_type + '.py')
     app.config.from_pyfile(configuration)
 
-
-    from app.auth import authentication
-    app.register_blueprint(authentication)
+    from app.auth import auth
+    app.register_blueprint(auth)
 
     return app
 
