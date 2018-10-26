@@ -2,5 +2,4 @@
 from flask import Blueprint, url_for
 
 auth = Blueprint('auth', __name__, template_folder='templates')
-
-from app.auth import routes
+from plants.auth import routes
