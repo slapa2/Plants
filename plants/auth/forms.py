@@ -1,6 +1,9 @@
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+
+from plants.auth.models import User
 
 class RegistrationForm(FlaskForm):
     email = StringField("Email:", validators=[DataRequired(), Email()])
@@ -8,6 +11,9 @@ class RegistrationForm(FlaskForm):
     confirm = PasswordField('Powtórz hasło', validators=[DataRequired()])
     submit = SubmitField("Zarejestruj")
 
+    def validate_email(self, email):
+        if User.query.filter_by(email=email.data).first():
+            raise ValidationError(f'Użytkownik: {email.data} już istnieje')
 
 class LoginForm(FlaskForm):
     email = StringField("Email:", validators=[DataRequired()])
