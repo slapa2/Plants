@@ -2,7 +2,7 @@
 
 {% block content %}
     <div>
-        <form method="post" action="{{ url_for('auth.login') }}">
+        <form method="post">
             {{ form.hidden_tag() }}
             <fieldset>
                 <legend>Logowanie</legend>
