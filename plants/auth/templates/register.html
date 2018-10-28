@@ -1,13 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div>
-        <form method="post" action="{{ url_for('auth.register') }}">
+    <div class="container">
+        <form method="POST" action="">
             {{ form.hidden_tag() }}
-            <fieldset>
-                <legend>Rejestracja</legend>
-                <div>
-                    {{ form.email.label }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Rejestracja</legend>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control") }}
                     {% if form.email.errors %}
                         <div style="color: red">
                             {% for error in form.email.errors  %}
@@ -15,10 +15,10 @@
                             {% endfor %}
                         </div>
                     {% endif %}
-                    {{ form.email }}
+                    {{ form.email(class="form-control") }}
                 </div>
-                <div>
-                    {{ form.password.label }}
+                <div class="form-group">
+                    {{ form.password.label(class="form-control") }}
                     {% if form.password.errors %}
                         <div style="color: red">
                             {% for error in form.password.errors  %}
@@ -26,10 +26,10 @@
                             {% endfor %}
                         </div>
                     {% endif %}
-                    {{ form.password }}
+                    {{ form.password(class="form-control") }}
                 </div>
-                <div>
-                    {{ form.confirm.label }}
+                <div class="form-group">
+                    {{ form.confirm.label(class="form-control") }}
                     {% if form.confirm.errors %}
                         <div style="color: red">
                             {% for error in form.confirm.errors  %}
@@ -37,20 +37,20 @@
                             {% endfor %}
                         </div>
                     {% endif %}
-                    {{ form.confirm }}
-                </div>
-                <div>
-                    {{ form.submit }}
+                    {{ form.confirm(class="form-control") }}
                 </div>
             </fieldset>
-
+            <div class="form-group">
+                {{ form.submit(class="btn btn-success") }}
+            </div>
         </form>
     </div>
-    <div>
-        <small>
-            Jeśli masz już konto <a href="{{ url_for('auth.login') }}">zaloguj się</a>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Jeśli masz już konto <a href="{{ url_for('auth.login') }}" class="ml-2">zaloguj się</a>
         </small>
     </div>
+
 
 
 {% endblock content %}
