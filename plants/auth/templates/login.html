@@ -1,60 +1,35 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div>
-        <form method="post" action="{{ url_for('auth.login') }}">
+    <div class="container">
+        <form method="POST" action="">
             {{ form.hidden_tag() }}
-            <fieldset>
-                <legend>Logowanie</legend>
-                <div>
-                    {{ form.email.label }}
-                    {% if form.email.errors %}
-                        <div style="color: red">
-                            {% for error in form.email.errors  %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                    {{ form.email }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Logowanie</legend>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {{ form.email(class="form-control") }}
                 </div>
-                <div>
-                    {{ form.password.label }}
-                    {% if form.password.errors %}
-                        <div style="color: red">
-                            {% for error in form.password.errors  %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                    {{ form.password }}
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {{ form.password(class="form-control") }}
                 </div>
-                <div>
-                    {{ form.stay_loggedin.label }}
-                    {% if form.stay_loggedin.errors %}
-                        <div style="color: red">
-                            {% for error in form.stay_loggedin.errors  %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                    {{ form.stay_loggedin }}
+                <div class="form-check">
+                    {{ form.stay_loggedin(class="form-check-input") }}
+                    {{ form.stay_loggedin.label(class="form-check-label") }}
                 </div>
-                <div>
-                    {{ form.submit }}
-                </div>
-                <small>
-                    <a href="#">Nie pamiętasz hasła? </a>
-                </small>
             </fieldset>
-
+            <div class="form-group">
+                {{ form.submit(class="btn btn-success") }}
+            </div>
+            <small class="form-group">
+                <a href="#">Zapomiałeś hasła?</a>
+            </small>
         </form>
     </div>
-    <div>
-
-        <small>
-            Jeśli nie masz konta <a href="{{ url_for('auth.register') }}">zarejestruj się</a>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Jeśli nie masz konta <a class="ml-2" href="{{ url_for('auth.register') }}">zarejestruj się</a>
         </small>
     </div>
-
-
 {% endblock content %}
