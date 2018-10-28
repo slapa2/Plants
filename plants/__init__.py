@@ -23,5 +23,8 @@ def create_app(config_type): # dev, test, prod
     from plants.auth import auth
     app.register_blueprint(auth)
 
+    from plants.plants import plants
+    app.register_blueprint(plants)
+
     return app
 

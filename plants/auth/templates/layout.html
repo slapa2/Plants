@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
           integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
     {% if title %}
         <title>Plants - {{ title }}</title>
     {% else %}
@@ -21,13 +23,13 @@
 <header>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <span class="navbar-brand h1">
+            <span class="logo navbar-brand h1 ">
                 <a class="navbar-brand" href="{{ url_for('auth.landing') }}"><i class="fas fa-leaf"></i> MyPlants</a>
             </span>
 
             <div class="mr-auto">
                 <ul class="nav">
-                    <li class="nav-item"><a href="#" class="nav-link">Encyklopedia</a> </li>
+                    <li class="nav-item"><a href="{{ url_for('plants.plants_catalog') }}" class="nav-link">Encyklopedia</a> </li>
                     <li class="nav-item"><a href="#" class="nav-link">Moje Rośliny</a> </li>
                     <li class="nav-item"><a href="#" class="nav-link">O rojekcie</a> </li>
                     <li class="nav-item"><a href="#" class="nav-link">Kontakt</a> </li>
@@ -35,11 +37,11 @@
             </div>
             <ul class="nav">
               {% if current_user.is_authenticated %}
-                  <li class="nav-item"><a href="{{ url_for('auth.account') }}">Profil</a></li>
-                  <li class="nav-item"><a href="{{ url_for('auth.logout') }}">Wyloguj</a></li>
+                  <li class="nav-item ml-3"><a href="{{ url_for('auth.account') }}">Profil</a></li>
+                  <li class="nav-item ml-3"><a href="{{ url_for('auth.logout') }}">Wyloguj</a></li>
               {% else %}
-                  <li class="nav-item"><a href="{{ url_for('auth.login') }}">Logowanie</a></li>
-                  <li class="nav-item"><a href="{{ url_for('auth.register') }}">Rejestracja</a></li>
+                  <li class="nav-item ml-3"><a href="{{ url_for('auth.login') }}">Logowanie</a></li>
+                  <li class="nav-item ml-3"><a href="{{ url_for('auth.register') }}">Rejestracja</a></li>
               {% endif %}
             </ul>
         </div>
@@ -47,7 +49,7 @@
 </header>
 <main role="main" class="container">
     <div class="row">
-        <div class="col-10">
+        <div class="col-9">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
@@ -61,8 +63,10 @@
         </div>
     </div>
 </main>
-<footer>
-    Sławek :)
+<footer class="page-footer font-small">
+  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Sławomir Pawłowski</a>
+  </div>
 </footer>
 
 <!-- Optional JavaScript -->
