@@ -34,8 +34,13 @@
                 </ul>
             </div>
             <ul class="nav">
-                <li class="nav-item"><a href="{{ url_for('auth.login') }}" class="nav-link">Logowanie</a></li>
-                <li class="nav-item"><a href="{{ url_for('auth.register') }}" class="nav-link">Rejestracja</a></li>
+              {% if current_user.is_authenticated %}
+                  <li class="nav-item"><a href="{{ url_for('auth.account') }}">Profil</a></li>
+                  <li class="nav-item"><a href="{{ url_for('auth.logout') }}">Wyloguj</a></li>
+              {% else %}
+                  <li class="nav-item"><a href="{{ url_for('auth.login') }}">Logowanie</a></li>
+                  <li class="nav-item"><a href="{{ url_for('auth.register') }}">Rejestracja</a></li>
+              {% endif %}
             </ul>
         </div>
     </nav>
