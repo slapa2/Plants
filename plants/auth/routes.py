@@ -29,5 +29,5 @@ def login():
             flash(f'Witaj {form.email.data}!', 'success')
             return redirect(url_for('auth.landing'))
         else:
-            flash(f'Zły email lub hasło!', 'success')
+            flash(f'Zły email lub hasło!', 'danger')
     return render_template('login.html', title='login', form=form)
