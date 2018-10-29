@@ -9,7 +9,7 @@ from plants.plants.forms import AddPlantForm
 @plants.route('/plants')
 def plants_catalog():
     plants = Plant.query.all()
-    return render_template('plants_catalog.html', title='baza roślin', plants=plants)
+    return render_template('plants.html', title='baza roślin', plants=plants)
 
 
 @plants.route('/add.plant', methods=['GET', 'POST'])

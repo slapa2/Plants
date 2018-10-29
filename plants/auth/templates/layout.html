@@ -21,27 +21,28 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <span class="logo navbar-brand h1 ">
-                <a class="navbar-brand" href="{{ url_for('auth.landing') }}"><i class="fas fa-leaf"></i> MyPlants</a>
+    <nav class="navbar navbar">
+        <div class="container">
+            <span class=" navbar-brand h1 ">
+                <a class="green navbar-brand" href="{{ url_for('auth.landing') }}"><i class="fas fa-leaf"></i> MyPlants</a>
             </span>
 
             <div class="mr-auto">
-                <ul class="nav">
-                    <li class="nav-item"><a href="{{ url_for('plants.plants_catalog') }}" class="nav-link">Encyklopedia</a> </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Moje Rośliny</a> </li>
-                    <li class="nav-item"><a href="#" class="nav-link">O rojekcie</a> </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Kontakt</a> </li>
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="{{ url_for('plants.plants_catalog') }}" class="nav-link {% if request.path == '/plants' %} active {% endif %} ">Encyklopedia</a> </li>
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item"><a href="#" class="nav-link{% if request.path == '/myplants' %} active {% endif %}">Moje Rośliny</a> </li>
+                    {% endif %}
+                    <li class="nav-item"><a href="#" class="nav-link{% if request.path == '/contact' %} active {% endif %}">Kontakt</a> </li>
                 </ul>
             </div>
-            <ul class="nav">
+            <ul class="nav  nav-pills justify-content-end">
               {% if current_user.is_authenticated %}
-                  <li class="nav-item ml-3"><a href="{{ url_for('auth.account') }}">Profil</a></li>
-                  <li class="nav-item ml-3"><a href="{{ url_for('auth.logout') }}">Wyloguj</a></li>
+                  <li class="nav-item ml-3"><a class="nav-link {% if request.path == '/account' %} active {% endif %}" href="{{ url_for('auth.account') }}">Profil</a></li>
+                  <li class="nav-item ml-3"><a class="nav-link{% if request.path == '/logout' %} active {% endif %}" href="{{ url_for('auth.logout') }}">Wyloguj</a></li>
               {% else %}
-                  <li class="nav-item ml-3"><a href="{{ url_for('auth.login') }}">Logowanie</a></li>
-                  <li class="nav-item ml-3"><a href="{{ url_for('auth.register') }}">Rejestracja</a></li>
+                  <li class="nav-item"><a class="nav-link{% if request.path == '/login' %} active {% endif %}" href="{{ url_for('auth.login') }}">Logowanie</a></li>
+                  <li class="nav-item"><a class="nav-link{% if request.path == '/register' %} active {% endif %}" href="{{ url_for('auth.register') }}">Rejestracja</a></li>
               {% endif %}
             </ul>
         </div>
@@ -49,7 +50,7 @@
 </header>
 <main role="main" class="container">
     <div class="row">
-        <div class="col-9">
+        <div class="col-12">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
@@ -63,7 +64,7 @@
         </div>
     </div>
 </main>
-<footer class="page-footer font-small">
+<footer class="page-footer font-small mt-4">
   <div class="footer-copyright text-center py-3">© 2018 Copyright:
     <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Sławomir Pawłowski</a>
   </div>
