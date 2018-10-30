@@ -2,23 +2,22 @@
 
 {% block content %}
     <div class="container">
-        {% if current_user.is_authenticated %}
-            <div class="row">
-                <a href="{{ url_for('plants.add_plant') }}">Dodaj Roślinę</a>
-            </div>
-        {% endif %}
-        <div class="row mt-4">
-            {% for plant in plants %}
-                <div class="col-4 card" style="width: 18rem;">
-                    <div class=" plant_icon">
-                        <img class="card-img-top mt-3 plant_icon_img" src="{{ plant.image }}" alt="Card image cap">
-                    </div>
+
+        <div class="row">
+            {% if current_user.is_authenticated %}
+                <a class="btn btn-info" href="{{ url_for('plants.add_plant') }}">Dodaj Roślinę</a>
+            {% endif %}
+        </div>
+
+        {% for plant in plants %}
+            <div class="card mt-4">
                 <div class="card-body">
+                    <img class="card-img-top mt-3 plant_icon" style="width: auto; height: 250px" src="{{ plant.image }}" alt="Card image cap">
                     <p class="card-text">{{ plant.polish_name }}</p>
                 </div>
-                </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
     </div>
-    </div>
+
 
 {% endblock content %}

@@ -2,13 +2,12 @@ main {
     min-height: 400px;
 }
 
-.plant_icon {
-    height: 300px;
-    width: 300px;
-}
+/*.plant_icon {*/
+    /*height: 300px;*/
+    /*width: 300px;*/
+/*}*/
 .plant_icon_img {
-    max-height: 300px;
-    max-width: 300px;
+    position: absolute; clip: rect
 }
 
 .green {
