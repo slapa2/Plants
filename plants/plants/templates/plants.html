@@ -47,7 +47,21 @@
                              src="{{ plant.image }}" alt="Card image cap">
                     </div>
                     <div class="col=8">
-                        <p class="card-text"></p>
+                        <div class="card-text h3">
+                            {% for sun in range(plant.light_level) %}
+                                <i class="fas fa-sun" style="color: #ffe140"></i>
+                            {% endfor %}
+                            {% for sun in range(5 - plant.light_level) %}
+                                <i class="fas fa-sun" style="color: lightgrey"></i>
+                            {% endfor %}
+                            <br>
+                            {% for sun in range(plant.water_level) %}
+                                <i class="fas fa-tint" style="color: deepskyblue"></i>
+                            {% endfor %}
+                            {% for sun in range(5 - plant.water_level) %}
+                                <i class="fas fa-tint" style="color: lightgrey"></i>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
