@@ -3,17 +3,52 @@
 {% block content %}
     <div class="container">
 
-        <div class="row">
+        <div class="row navbar">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Wyszukaj</button>
+            </form>
             {% if current_user.is_authenticated %}
-                <a class="btn btn-info" href="{{ url_for('plants.add_plant') }}">Dodaj Roślinę</a>
+                <div class="nav-item"><a class="nav-link btn btn-info" href="{{ url_for('plants.add_plant') }}">Dodaj
+                    Roślinę</a>
+                </div>
             {% endif %}
         </div>
 
+
         {% for plant in plants %}
-            <div class="card mt-4">
-                <div class="card-body">
-                    <img class="card-img-top mt-3 plant_icon" style="width: auto; height: 250px" src="{{ plant.image }}" alt="Card image cap">
-                    <p class="card-text">{{ plant.polish_name }}</p>
+            <div class="card mt-4 text-dar">
+
+                <div class="navbar card-header h6">
+                    <a class="card-link" href="{{ url_for('plants.plant_info',plant_id=plant.id) }}">
+                        <div>
+                            <b>{{ plant.polish_name }}</b>
+                            {% if plant.latin_name %}<i>{{ plant.latin_name }}</i>{% endif %}
+                        </div>
+                    </a>
+
+                    <div>
+                        <a class="btn btn-outline-info justify-content-end"
+                           href="#">Dodaj do swoich
+                        </a>
+                        {% if current_user.is_authenticated %}
+                            <a class="btn btn-outline-info justify-content-end"
+                               href="{{ url_for('plants.edit_plant', plant_id=plant.id) }}">Edytuj
+                            </a>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <div class="row card-body">
+                    <div class="col-4">
+                        <img class="card-img-top plant_icon"
+                             style="width: auto; height: auto; max-height: 250px; max-width: 250px"
+                             src="{{ plant.image }}" alt="Card image cap">
+                    </div>
+                    <div class="col=8">
+                        <p class="card-text"></p>
+                    </div>
                 </div>
             </div>
         {% endfor %}

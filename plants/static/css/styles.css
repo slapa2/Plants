@@ -1,15 +1,21 @@
+body{
+    font-family: 'Quicksand', sans-serif;
+}
+
 main {
     min-height: 400px;
 }
 
-/*.plant_icon {*/
-    /*height: 300px;*/
-    /*width: 300px;*/
-/*}*/
-.plant_icon_img {
-    position: absolute; clip: rect
-}
-
 .green {
     color: forestgreen !important;
+}
+
+.card-link {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}.card-link:hover {
+    text-decoration: none;
+    color: rgba(97, 97, 97, 0.87);
+    font-size: 20px;
 }
