@@ -19,3 +19,18 @@ main {
     color: rgba(97, 97, 97, 0.87);
     font-size: 20px;
 }
+
+.level-icon {
+    height: 29px;
+    width: 29px;
+    text-align: center;
+}
+.level-icon-sun {
+    color: #ffe140;
+}
+.level-icon-tint {
+    color: deepskyblue;
+}
+.level-icon-grey {
+    color: lightgrey;
+}

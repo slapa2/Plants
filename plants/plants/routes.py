@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 from plants import db
 from plants.plants import plants
-from plants.plants.models import Plant, PlantImage
+from plants.plants.models import Plant
 from plants.plants.forms import AddPlantForm
 
 @plants.route('/plants')

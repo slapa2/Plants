@@ -49,17 +49,17 @@
                     <div class="col=8">
                         <div class="card-text h3">
                             {% for sun in range(plant.light_level) %}
-                                <i class="fas fa-sun" style="color: #ffe140"></i>
+                                <i class="fas fa-sun level-icon level-icon-sun"></i>
                             {% endfor %}
                             {% for sun in range(5 - plant.light_level) %}
-                                <i class="fas fa-sun" style="color: lightgrey"></i>
+                                <i class="fas fa-sun level-icon level-icon-grey"></i>
                             {% endfor %}
                             <br>
                             {% for sun in range(plant.water_level) %}
-                                <i class="fas fa-tint" style="color: deepskyblue"></i>
+                                <i class="level-icon level-icon-tint fas fa-tint "></i>
                             {% endfor %}
                             {% for sun in range(5 - plant.water_level) %}
-                                <i class="fas fa-tint" style="color: lightgrey"></i>
+                                <i class="fas fa-tint level-icon level-icon-grey"></i>
                             {% endfor %}
                         </div>
                     </div>
