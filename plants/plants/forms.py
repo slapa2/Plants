@@ -19,3 +19,8 @@ class AddPlantForm(FlaskForm):
     multiplication = StringField('Rozmnażanie:', validators=[])
     image = StringField('url obrazka:', validators=[DataRequired()])
     submit = SubmitField("Zapisz")
+
+
+class PlantSearchForm(FlaskForm):
+    name = StringField('', validators=[DataRequired()])
+    search = SubmitField('Wyszukaj')

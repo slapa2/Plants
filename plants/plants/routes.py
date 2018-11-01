@@ -4,12 +4,17 @@ from flask_login import login_user, logout_user, current_user, login_required
 from plants import db
 from plants.plants import plants
 from plants.plants.models import Plant
-from plants.plants.forms import AddPlantForm
+from plants.plants.forms import AddPlantForm, PlantSearchForm
 
-@plants.route('/plants')
+@plants.route('/plants', methods=['GET', 'POST'])
 def plants_catalog():
-    plants = Plant.query.all()
-    return render_template('plants.html', title='baza roślin', plants=plants)
+    search_form = PlantSearchForm()
+
+    if search_form.validate_on_submit():
+        ret = Plant.query.filter(Plant.polish_name.ilike(search_form.name.data)).all()
+    else:
+        ret = Plant.query.all()
+    return render_template('plants.html', title='baza roślin', plants=ret, search_form=search_form)
 
 
 @plants.route('/add.plant', methods=['GET', 'POST'])
@@ -76,6 +81,7 @@ def edit_plant(plant_id):
     form.image.data = plant.image
 
     return render_template('addPlant.html', form=form, title='nowa roślina')
+
 
 @plants.route('/plants/<plant_id>')
 def plant_info(plant_id):

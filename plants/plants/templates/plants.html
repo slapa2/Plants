@@ -4,9 +4,10 @@
     <div class="container">
 
         <div class="row navbar">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Wyszukaj</button>
+            <form method="POST" class="form-inline">
+                {{ search_form.hidden_tag() }}
+                {{ search_form.name(class="form-control mr-sm-2") }}
+                {{ search_form.search(class="btn btn-success btn-outline-success my-2 my-sm-0") }}
             </form>
             {% if current_user.is_authenticated %}
                 <div class="nav-item"><a class="nav-link btn btn-info" href="{{ url_for('plants.add_plant') }}">Dodaj
