@@ -20,7 +20,7 @@ def add_plant():
         plant = Plant(
             polish_name=        form.polish_name.data,
             latin_name=         form.latin_name.data,
-            light_level =       form.light_level.data,
+            light_level=        form.light_level.data,
             light_description = form.light_description.data,
             water_level =       form.water_level.data,
             water_description = form.water_description.data,
@@ -45,18 +45,18 @@ def edit_plant(plant_id):
     form = AddPlantForm()
 
     if form.validate_on_submit():
-        plant.polish_name=form.polish_name.data
-        plant.latin_name=form.latin_name.data
-        plant.light_level=form.light_level.data
-        plant.light_description=form.light_description.data
-        plant.water_level=form.water_level.data
-        plant.water_description=form.water_description.data
-        plant.temperature=form.temperature.data
-        plant.soil=form.soil.data
-        plant.fertilizing=form.fertilizing.data
-        plant.transplanting=form.transplanting.data
-        plant.multiplication=form.multiplication.data
-        plant.image=form.image.data
+        plant.polish_name = form.polish_name.data
+        plant.latin_name = form.latin_name.data
+        plant.light_level = form.light_level.data
+        plant.light_description = form.light_description.data
+        plant.water_level = form.water_level.data
+        plant.water_description = form.water_description.data
+        plant.temperature = form.temperature.data
+        plant.soil = form.soil.data
+        plant.fertilizing = form.fertilizing.data
+        plant.transplanting = form.transplanting.data
+        plant.multiplication = form.multiplication.data
+        plant.image = form.image.data
         db.session.add(plant)
         db.session.commit()
         flash(f'Roślina {form.polish_name.data} została dodana do bazy!', 'success')
