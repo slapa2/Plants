@@ -7,162 +7,35 @@
 
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Dodaj roślinę</legend>
-                <div class="form-group">
-                    {{ form.polish_name.label(class="form-control-label") }}
-                    {% if form.polish_name.errors  %}
-                        {{ form.polish_name(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.polish_name.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.polish_name(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.latin_name.label(class="form-control-label") }}
-                    {% if form.latin_name.errors  %}
-                        {{ form.latin_name(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.latin_name.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.latin_name(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.light_level.label(class="form-control-label") }}
-                    {% if form.light_level.errors  %}
-                        {{ form.light_level(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.light_level.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.light_level(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.water_level.label(class="form-control-label") }}
-                    {% if form.water_level.errors  %}
-                        {{ form.water_level(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.water_level.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.water_level(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.light_description.label(class="form-control-label") }}
-                    {% if form.light_description.errors  %}
-                        {{ form.light_description(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.light_description.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.light_description(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.water_description.label(class="form-control-label") }}
-                    {% if form.water_description.errors  %}
-                        {{ form.water_description(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.water_description.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.water_description(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.temperature.label(class="form-control-label") }}
-                    {% if form.temperature.errors  %}
-                        {{ form.temperature(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.temperature.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.temperature(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.soil.label(class="form-control-label") }}
-                    {% if form.soil.errors  %}
-                        {{ form.soil(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.soil.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.soil(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.fertilizing.label(class="form-control-label") }}
-                    {% if form.fertilizing.errors  %}
-                        {{ form.fertilizing(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.fertilizing.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.fertilizing(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.transplanting.label(class="form-control-label") }}
-                    {% if form.transplanting.errors  %}
-                        {{ form.transplanting(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.transplanting.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.transplanting(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.multiplication.label(class="form-control-label") }}
-                    {% if form.multiplication.errors  %}
-                        {{ form.multiplication(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.multiplication.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.multiplication(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.image.label(class="form-control-label") }}
-                    {% if form.image.errors  %}
-                        {{ form.image(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.image.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.image(class="form-control") }}
-                    {% endif %}
-                </div>
+
+                {% for label, errors, data in [
+                    (form.polish_name.label, form.polish_name.errors, form.polish_name),
+                    (form.latin_name.label, form.latin_name.errors, form.latin_name),
+                    (form.light_level.label, form.light_level.errors, form.light_level),
+                    (form.water_level.label, form.water_level.errors, form.water_level),
+                    (form.temperature.label, form.temperature.errors, form.temperature),
+                    (form.soil.label, form.soil.errors, form.soil),
+                    (form.fertilizing.label, form.fertilizing.errors, form.fertilizing),
+                    (form.transplanting.label, form.transplanting.errors, form.transplanting),
+                    (form.multiplication.label, form.multiplication.errors, form.multiplication),
+                    (form.image.label, form.image.errors, form.image)
+
+                ] %}
+                    <div class="form-group">
+                        {{ label(class="form-control-label") }}
+                        {% if errors %}
+                            {{ data(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ data(class="form-control") }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-success") }}
