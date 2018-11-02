@@ -4,7 +4,7 @@ from wtforms import StringField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, Length, ValidationError
 
 
-class AddPlantForm(FlaskForm):
+class PlantForm(FlaskForm):
     polish_name = StringField('Nazwa:', validators=[DataRequired()])
     latin_name = StringField('Nazwa łacińska:', validators=[])
 

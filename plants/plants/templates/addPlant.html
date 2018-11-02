@@ -3,23 +3,25 @@
 {% block content %}
 
     <div class="container">
-        <form method="POST" action="">
+        <form method="POST">
+            {{ form.hidden_tag() }}
 
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Dodaj roślinę</legend>
+                <legend class="border-bottom mb-4">{{ title }}</legend>
 
                 {% for label, errors, data in [
                     (form.polish_name.label, form.polish_name.errors, form.polish_name),
                     (form.latin_name.label, form.latin_name.errors, form.latin_name),
                     (form.light_level.label, form.light_level.errors, form.light_level),
                     (form.water_level.label, form.water_level.errors, form.water_level),
+                    (form.light_description.label, form.light_description.errors, form.light_description),
+                    (form.water_description.label, form.water_description.errors, form.water_description),
                     (form.temperature.label, form.temperature.errors, form.temperature),
                     (form.soil.label, form.soil.errors, form.soil),
                     (form.fertilizing.label, form.fertilizing.errors, form.fertilizing),
                     (form.transplanting.label, form.transplanting.errors, form.transplanting),
                     (form.multiplication.label, form.multiplication.errors, form.multiplication),
                     (form.image.label, form.image.errors, form.image)
-
                 ] %}
                     <div class="form-group">
                         {{ label(class="form-control-label") }}

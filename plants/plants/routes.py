@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from plants import db
 from plants.plants import plants
 from plants.plants.models import Plant
-from plants.plants.forms import AddPlantForm, PlantSearchForm
+from plants.plants.forms import PlantForm, PlantSearchForm
 
 @plants.route('/plants/catalog', methods=['GET', 'POST'])
 def plants_catalog():
@@ -20,7 +20,7 @@ def plants_catalog():
 @plants.route('/plants/add', methods=['GET', 'POST'])
 @login_required
 def add_plant():
-    form = AddPlantForm()
+    form = PlantForm()
     if form.validate_on_submit():
         plant = Plant(
             polish_name=        form.polish_name.data,
@@ -40,14 +40,14 @@ def add_plant():
         db.session.commit()
         flash(f'Roślina {form.polish_name.data} została dodana do bazy!', 'success')
         return redirect(url_for('plants.plants_catalog'))
-    return render_template('addPlant.html', form=form, title='nowa roślina')
+    return render_template('addPlant.html', form=form, title='Dodaj roślinę')
 
 @plants.route('/plants/edit/<plant_id>', methods=['GET', 'POST'])
 @login_required
 def edit_plant(plant_id):
 
     plant = Plant.query.get(plant_id)
-    form = AddPlantForm()
+    form = PlantForm()
 
     if form.validate_on_submit():
         plant.polish_name = form.polish_name.data
@@ -62,9 +62,9 @@ def edit_plant(plant_id):
         plant.transplanting = form.transplanting.data
         plant.multiplication = form.multiplication.data
         plant.image = form.image.data
-        db.session.add(plant)
+
         db.session.commit()
-        flash(f'Roślina {form.polish_name.data} została dodana do bazy!', 'success')
+        flash(f'Roślina {form.polish_name.data} została uaktualniona!', 'success')
         return redirect(url_for('plants.plants_catalog'))
 
     form.polish_name.data = plant.polish_name
@@ -80,7 +80,7 @@ def edit_plant(plant_id):
     form.multiplication.data = plant.multiplication
     form.image.data = plant.image
 
-    return render_template('addPlant.html', form=form, title='nowa roślina')
+    return render_template('addPlant.html', form=form, title='Edytuj roślinę')
 
 
 @plants.route('/plants/<plant_id>')
