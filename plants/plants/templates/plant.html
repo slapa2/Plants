@@ -1,35 +1,69 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
     <div class="container">
-
-            <div class="row">
-                {% if current_user.is_authenticated %}
-                    <a class="btn btn-info" href="{{ url_for('plants.edit_plant', plant_id=plant.id) }}" class="btn" role="button">Edytuj</a>
-                {% endif %}
+        <div class="row card mt-4 text-dar">
+            <div class="navbar card-header h6">
+                <div>
+                    <b>{{ plant.polish_name }}</b>
+                    {% if plant.latin_name %}<i>{{ plant.latin_name }}</i>{% endif %}
+                </div>
+                <div>
+                    <a class="btn btn-outline-info justify-content-end"
+                       href="#">Dodaj do swoich
+                    </a>
+                    {% if current_user.is_authenticated %}
+                        <a class="btn btn-outline-info justify-content-end"
+                           href="{{ url_for('plants.edit_plant', plant_id=plant.id) }}">Edytuj
+                        </a>
+                    {% endif %}
+                </div>
             </div>
-
-
-        <div class="row">
-            <div class="col-6" style="max-width: 100px;">
-                <img src="{{ plant.image }}" alt="{{ plant.polish_name }}">
-            </div>
-
-            <div class="col-4">
-
-                {% if plant.polish_name %}<p>{{ plant.polish_name }} {% endif %}
-                {% if plant.latin_name %}<p>{{ plant.latin_name }} {% endif %}
-                {% if plant.light_level %}<p>{{ plant.light_level }} {% endif %}
-                {% if plant.light_description %}<p>{{ plant.light_description }} {% endif %}
-                {% if plant.water_level %}<p>{{ plant.water_level }} {% endif %}
-                {% if plant.water_description %}<p>{{ plant.water_description }} {% endif %}
-                {% if plant.temperature %}<p>{{ plant.temperature }} {% endif %}
-                {% if plant.soil %}<p>{{ plant.soil }} {% endif %}
-                {% if plant.fertilizing %}<p>{{ plant.fertilizing }} {% endif %}
-                {% if plant.transplanting %}<p>{{ plant.transplanting }} {% endif %}
-                {% if plant.multiplication %}<p>{{ plant.multiplication }} {% endif %}
-
+            <div class="card-body">
+                <div class="card-text h3 row">
+                    <div class="col-5">
+                        <img class="card-img-top plant_icon pl-2"
+                             style="width: auto; height: auto; max-height: 400px; max-width: 400px"
+                             src="{{ plant.image }}" alt="Card image cap">
+                        <div class="card-text pt-4 pl-4">
+                            {% for sun in range(plant.light_level) %}
+                                <i class="fas fa-sun level-icon level-icon-sun"></i>
+                            {% endfor %}
+                            {% for sun in range(5 - plant.light_level) %}
+                                <i class="fas fa-sun level-icon level-icon-grey"></i>
+                            {% endfor %}
+                            <br>
+                            {% for sun in range(plant.water_level) %}
+                                <i class="level-icon level-icon-tint fas fa-tint "></i>
+                            {% endfor %}
+                            {% for sun in range(5 - plant.water_level) %}
+                                <i class="fas fa-tint level-icon level-icon-grey"></i>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        {% for data, label in [
+                            (plant.light_description, 'Stanowisko'),
+                            (plant.water_description, 'Podlewanie'),
+                            (plant.temperature, 'Temperatura'),
+                            (plant.soil, 'Podłoże'),
+                            (plant.fertilizing, 'Nawożenie'),
+                            (plant.transplanting, 'Przesadzanie'),
+                            (plant.multiplication, 'Rozmnarzanie')
+                        ] %}
+                            {% if data %}
+                                <div class="card mb-3 text-dar">
+                                    <div class=" card-header h5">
+                                        {{ label }}
+                                    </div>
+                                    <div class="card-body card-text h6">
+                                        {{ data }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
