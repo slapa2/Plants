@@ -11,7 +11,7 @@ def plants_catalog():
     search_form = PlantSearchForm()
 
     if search_form.validate_on_submit():
-        ret = Plant.query.filter(Plant.polish_name.ilike(search_form.name.data)).all()
+        ret = Plant.query.filter(Plant.polish_name.ilike(f'%{search_form.name.data}%') | Plant.latin_name.ilike(f'%{search_form.name.data}%')).all()
     else:
         ret = Plant.query.all()
     return render_template('plants.html', title='baza roślin', plants=ret, search_form=search_form)
