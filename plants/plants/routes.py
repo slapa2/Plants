@@ -6,7 +6,7 @@ from plants.plants import plants
 from plants.plants.models import Plant
 from plants.plants.forms import AddPlantForm, PlantSearchForm
 
-@plants.route('/plants', methods=['GET', 'POST'])
+@plants.route('/plants/catalog', methods=['GET', 'POST'])
 def plants_catalog():
     search_form = PlantSearchForm()
 
@@ -17,7 +17,7 @@ def plants_catalog():
     return render_template('plants.html', title='baza roślin', plants=ret, search_form=search_form)
 
 
-@plants.route('/add.plant', methods=['GET', 'POST'])
+@plants.route('/plants/add', methods=['GET', 'POST'])
 @login_required
 def add_plant():
     form = AddPlantForm()
@@ -42,7 +42,7 @@ def add_plant():
         return redirect(url_for('plants.plants_catalog'))
     return render_template('addPlant.html', form=form, title='nowa roślina')
 
-@plants.route('/edit.plant/<plant_id>', methods=['GET', 'POST'])
+@plants.route('/plants/edit/<plant_id>', methods=['GET', 'POST'])
 @login_required
 def edit_plant(plant_id):
 
