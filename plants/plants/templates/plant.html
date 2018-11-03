@@ -26,19 +26,22 @@
                              style="width: auto; height: auto; max-height: 400px; max-width: 400px"
                              src="{{ plant.image }}" alt="Card image cap">
                         <div class="card-text pt-4 pl-4">
-                            {% for sun in range(plant.light_level) %}
-                                <i class="fas fa-sun level-icon level-icon-sun"></i>
-                            {% endfor %}
-                            {% for sun in range(5 - plant.light_level) %}
-                                <i class="fas fa-sun level-icon level-icon-grey"></i>
-                            {% endfor %}
-                            <br>
-                            {% for sun in range(plant.water_level) %}
-                                <i class="level-icon level-icon-tint fas fa-tint "></i>
-                            {% endfor %}
-                            {% for sun in range(5 - plant.water_level) %}
-                                <i class="fas fa-tint level-icon level-icon-grey"></i>
-                            {% endfor %}
+                            <div>
+                                {% for sun in range(plant.light_level) %}
+                                    <i class="fas fa-sun level-icon level-icon-sun"></i>
+                                {% endfor %}
+                                {% for sun in range(5 - plant.light_level) %}
+                                    <i class="fas fa-sun level-icon level-icon-grey"></i>
+                                {% endfor %}
+                            </div>
+                            <div class="mt-2">
+                                {% for sun in range(plant.water_level) %}
+                                    <i class="level-icon level-icon-tint fas fa-tint "></i>
+                                {% endfor %}
+                                {% for sun in range(5 - plant.water_level) %}
+                                    <i class="fas fa-tint level-icon level-icon-grey"></i>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                     <div class="col-7">

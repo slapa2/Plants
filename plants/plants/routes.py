@@ -8,13 +8,18 @@ from plants.plants.forms import PlantForm, PlantSearchForm
 
 @plants.route('/plants/catalog', methods=['GET', 'POST'])
 def plants_catalog():
+    pages = 5
+
+    page = request.args.get('page', 1, type=int)
+
     search_form = PlantSearchForm()
 
     if search_form.validate_on_submit():
-        ret = Plant.query.filter(Plant.polish_name.ilike(f'%{search_form.name.data}%') | Plant.latin_name.ilike(f'%{search_form.name.data}%')).all()
+        ret = Plant.query.filter(Plant.polish_name.ilike(f'%{search_form.name.data}%') | Plant.latin_name.ilike(f'%{search_form.name.data}%')).\
+            paginate(page=page, per_page=pages)
     else:
-        ret = Plant.query.all()
-    return render_template('plants.html', title='baza roślin', plants=ret, search_form=search_form)
+        ret = Plant.query.paginate(page=page, per_page=pages)
+    return render_template('plants.html', title='baza roślin', plants_list=ret, search_form=search_form)
 
 
 @plants.route('/plants/add', methods=['GET', 'POST'])
