@@ -53,7 +53,6 @@ def edit_plant(plant_id):
 
     plant = Plant.query.get(plant_id)
     form = PlantForm()
-
     if form.validate_on_submit():
         plant.polish_name = form.polish_name.data
         plant.latin_name = form.latin_name.data
@@ -91,4 +90,4 @@ def edit_plant(plant_id):
 @plants.route('/plants/<plant_id>')
 def plant_info(plant_id):
     plant = Plant.query.get(plant_id)
-    return render_template('plant.html', title='plant info', plant=plant)
+    return render_template('plant.html', title=plant.polish_name , plant=plant)

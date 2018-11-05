@@ -3,7 +3,8 @@
 {% block content %}
 
     <div class="container">
-        <form method="POST">
+        <div class="col-8">
+            <form method="POST">
             {{ form.hidden_tag() }}
 
             <fieldset class="form-group">
@@ -14,6 +15,7 @@
                     (form.latin_name.label, form.latin_name.errors, form.latin_name),
                     (form.light_level.label, form.light_level.errors, form.light_level),
                     (form.water_level.label, form.water_level.errors, form.water_level),
+                    (form.spray.label, form.spray.errors, form.spray),
                     (form.light_description.label, form.light_description.errors, form.light_description),
                     (form.water_description.label, form.water_description.errors, form.water_description),
                     (form.temperature.label, form.temperature.errors, form.temperature),
@@ -43,6 +45,7 @@
                 {{ form.submit(class="btn btn-success") }}
             </div>
         </form>
+        </div>
     </div>
 
 {% endblock content %}

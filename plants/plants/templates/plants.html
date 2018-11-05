@@ -25,24 +25,27 @@
                 </li>
                 <li class="nav-item">
                     {% if plants_list.page > 1 %}
-                        <a class="nav-link" href="{{ url_for('plants.plants_catalog', page=plants_list.page - 1) }}"><</a>
+                        <a class="nav-link"
+                           href="{{ url_for('plants.plants_catalog', page=plants_list.page - 1) }}"><</a>
                     {% else %}
                         <a class="nav-link" href="{{ url_for('plants.plants_catalog', page=1) }}"><</a>
                     {% endif %}
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('plants.plants_catalog', page=page) }}">{{ plants_list.page }}</a>
+                    <a class="nav-link"
+                       href="{{ url_for('plants.plants_catalog', page=page) }}">{{ plants_list.page }}</a>
                 </li>
                 <li class="nav-item">
                     {% if plants_list.page < plants_list.pages %}
-                        <a class="nav-link" href="{{ url_for('plants.plants_catalog', page=plants_list.page + 1) }}">></a>
+                        <a class="nav-link"
+                           href="{{ url_for('plants.plants_catalog', page=plants_list.page + 1) }}">></a>
                     {% else %}
                         <a class="nav-link" href="{{ url_for('plants.plants_catalog', page=plants_list.page) }}">></a>
                     {% endif %}
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('plants.plants_catalog', page=plants_list.pages) }}">{{ plants_list.pages }}</a>
+                    <a class="nav-link"
+                       href="{{ url_for('plants.plants_catalog', page=plants_list.pages) }}">{{ plants_list.pages }}</a>
                 </li>
             </ul>
         </div>
@@ -50,7 +53,6 @@
     <div class="container">
         {% for plant in plants_list.items %}
             <div class="card mt-4 text-dar">
-
                 <div class="navbar card-header h6">
                     <a class="card-link" href="{{ url_for('plants.plant_info',plant_id=plant.id) }}">
                         <div>
@@ -58,7 +60,6 @@
                             {% if plant.latin_name %}<i>{{ plant.latin_name }}</i>{% endif %}
                         </div>
                     </a>
-
                     <div>
                         <a class="btn btn-outline-info justify-content-end"
                            href="#">Dodaj do swoich
@@ -69,17 +70,14 @@
                             </a>
                         {% endif %}
                     </div>
-
                 </div>
-
                 <div class="row card-body">
-                    <div class="col-4">
-                        <img class="card-img-top plant_icon"
-                             style="width: auto; height: auto; max-height: 250px; max-width: 250px"
+                    <div class="col-3">
+                        <img class="card-img-top plant-icon"
                              src="{{ plant.image }}" alt="Card image cap">
                     </div>
-                    <div class="col=8">
-                        <div class="card-text h3">
+                    <div class="col-3 card-text h3">
+                        <div class="card-text text-center pt-4">
                             <div>
                                 {% for sun in range(plant.light_level) %}
                                     <i class="fas fa-sun level-icon level-icon-sun"></i>
@@ -96,9 +94,17 @@
                                     <i class="fas fa-tint level-icon level-icon-grey"></i>
                                 {% endfor %}
                             </div>
+                            <div class="text-center mt-4" >
+                                {% if plant.spray == True %}
+                                    <img src="/static/img/sprayer-green.png" class="">
+                                {% else %}
+                                    <img src="/static/img/sprayer-grey.png" class="">
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         {% endfor %}
     </div>

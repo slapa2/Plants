@@ -11,6 +11,10 @@ from plants.auth.forms import RegistrationForm, LoginForm
 def landing():
     return render_template('landing.html')
 
+@auth.route('/contact')
+def contact():
+    return render_template('contact.html', title='kontakt')
+
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -24,7 +28,7 @@ def register():
         db.session.commit()
         flash(f'Konto {form.email.data} zostało utworzone!', 'success')
         return redirect(url_for('auth.landing'))
-    return render_template('register.html', title='register', form=form)
+    return render_template('register.html', title='rejestracja', form=form)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -44,7 +48,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('auth.landing'))
         else:
             flash(f'Zły email lub hasło!', 'danger')
-    return render_template('login.html', title='login', form=form)
+    return render_template('login.html', title='logowanie', form=form)
 
 @auth.route('/logout')
 def logout():
@@ -55,4 +59,4 @@ def logout():
 @auth.route('/account')
 @login_required
 def account():
-    return render_template('account.html', title='account')
+    return render_template('account.html', title='profil')

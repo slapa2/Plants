@@ -16,8 +16,14 @@ main {
     font-size: 18px;
 }.card-link:hover {
     text-decoration: none;
-    color: rgba(97, 97, 97, 0.87);
+    color: #616161;
     font-size: 20px;
+}
+.plant-icon {
+    height: auto;
+    width: auto;
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .level-icon {

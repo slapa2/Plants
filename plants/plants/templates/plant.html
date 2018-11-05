@@ -25,7 +25,7 @@
                         <img class="card-img-top plant_icon pl-2"
                              style="width: auto; height: auto; max-height: 400px; max-width: 400px"
                              src="{{ plant.image }}" alt="Card image cap">
-                        <div class="card-text pt-4 pl-4">
+                        <div class="card-text text-center pt-4">
                             <div>
                                 {% for sun in range(plant.light_level) %}
                                     <i class="fas fa-sun level-icon level-icon-sun"></i>
@@ -41,6 +41,13 @@
                                 {% for sun in range(5 - plant.water_level) %}
                                     <i class="fas fa-tint level-icon level-icon-grey"></i>
                                 {% endfor %}
+                            </div>
+                            <div class="text-center mt-4" >
+                                {% if plant.spray == True %}
+                                    <img src="/static/img/sprayer-green.png" class="">
+                                {% else %}
+                                    <img src="/static/img/sprayer-grey.png" class="">
+                                {% endif %}
                             </div>
                         </div>
                     </div>

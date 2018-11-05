@@ -31,10 +31,7 @@
                     <a href="{{ url_for('plants.plants_catalog') }}" class="nav-link {% if request.path == '/plants/catalog' %} active {% endif %} ">Encyklopedia</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link{% if request.path == '/myplants' %} active {% endif %}">Moje Rośliny</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link{% if request.path == '/contact' %} active {% endif %}">Kontakt</a>
+                    <a href="{{ url_for('auth.contact') }}" class="nav-link{% if request.path == '/contact' %} active {% endif %}">Kontakt</a>
                 </li>
             </ul>
         </div>
@@ -77,6 +74,7 @@
     <div class="footer-copyright text-center py-3">
         © 2018 Copyright: Sławomir Pawłowski
     </div>
+    <div class="text-center py-3">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </footer>
 
 <!-- Optional JavaScript -->
