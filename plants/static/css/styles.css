@@ -5,9 +5,9 @@ main {
     min-height: 1000px;
 }
 
-.bg {
-    background-image: url("../img/background.jpg");
-}
+/*.bg {*/
+    /*background-image: url("../img/background.jpg");*/
+/*}*/
 
 .green {
     color: forestgreen !important;
