@@ -1,9 +1,12 @@
 body{
     font-family: 'Quicksand', sans-serif;
 }
-
 main {
-    min-height: 400px;
+    min-height: 1000px;
+}
+
+.bg {
+    background-image: url("../img/background.jpg");
 }
 
 .green {

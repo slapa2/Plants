@@ -20,9 +20,9 @@
         <title>Plants</title>
     {% endif %}
 </head>
-<body>
+<body class="{% if request.path == '/' %}bg{% endif %}">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="opacity: .5">
         <a class="navbar-brand" href="{{ url_for('auth.landing') }}" style="color: green"><i class="fas fa-leaf"></i>
             MyPlants</a>
         <div class="collapse navbar-collapse">
@@ -70,7 +70,7 @@
         </div>
     </div>
 </main>
-<footer class="page-footer font-small mt-4">
+<footer class="page-footer font-small mt-4" {% if request.path == '/' %}style="color: grey" {% endif %}>
     <div class="footer-copyright text-center py-3">
         © 2018 Copyright: Sławomir Pawłowski
     </div>
