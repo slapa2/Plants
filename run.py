@@ -5,8 +5,6 @@ from sqlalchemy import exc
 flask_app = create_app()
 with flask_app.app_context():
     db.create_all()
-    try:
-        if not User.query.filter_by(email='user@test.pl').first():
-            User.creata_user('user@test.pl', 'user')
-    except exc.IntegrityError:
-        flask_app.run()
+    if not User.query.filter_by(email='user@test.pl').first():
+        User.creata_user('user@test.pl', 'user')
+    flask_app.run()
