@@ -6,6 +6,7 @@ from plants.plants import plants
 from plants.plants.models import Plant
 from plants.plants.forms import PlantForm, PlantSearchForm
 
+
 @plants.route('/plants/catalog', methods=['GET', 'POST'])
 def plants_catalog():
     pages = 5
@@ -46,6 +47,7 @@ def add_plant():
         flash(f'Roślina {form.polish_name.data} została dodana do bazy!', 'success')
         return redirect(url_for('plants.plants_catalog'))
     return render_template('addPlant.html', form=form, title='Dodaj roślinę')
+
 
 @plants.route('/plants/edit/<plant_id>', methods=['GET', 'POST'])
 @login_required
