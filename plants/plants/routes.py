@@ -34,6 +34,7 @@ def add_plant():
             light_level=        form.light_level.data,
             light_description = form.light_description.data,
             water_level =       form.water_level.data,
+            spray =             form.spray.data,
             water_description = form.water_description.data,
             temperature =       form.temperature.data,
             soil =              form.soil.data,
@@ -61,6 +62,7 @@ def edit_plant(plant_id):
         plant.light_level = form.light_level.data
         plant.light_description = form.light_description.data
         plant.water_level = form.water_level.data
+        plant.spray = form.spray.data
         plant.water_description = form.water_description.data
         plant.temperature = form.temperature.data
         plant.soil = form.soil.data
@@ -78,6 +80,7 @@ def edit_plant(plant_id):
     form.light_level.data = plant.light_level
     form.light_description.data = plant.light_description
     form.water_level.data = plant.water_level
+    form.spray.data = plant.spray
     form.water_description.data = plant.water_description
     form.temperature.data = plant.temperature
     form.soil.data = plant.soil
