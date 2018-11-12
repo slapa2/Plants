@@ -1,7 +1,12 @@
 from plants import create_app, db
 from plants.auth.models import User
-from sqlalchemy import exc
+from sqlalchemy.exc import IntegrityError
+
 
 flask_app = create_app()
 with flask_app.app_context():
-    flask_app.run()
+    db.create_all()
+    try:
+        User.creata_user('user@test.pl', 'user')
+    except IntegrityError :
+        print('IntegrityError: User user@test.pl already exist')
