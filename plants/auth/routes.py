@@ -7,18 +7,10 @@ from plants.auth.models import User
 from plants.auth.forms import RegistrationForm, LoginForm
 
 
-@auth.route('/')
-def landing():
-    return render_template('landing.html')
-
-@auth.route('/contact')
-def contact():
-    return render_template('contact.html', title='kontakt')
-
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('auth.landing'))
+        return redirect(url_for('main.landing'))
 
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -27,14 +19,14 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f'Konto {form.email.data} zostało utworzone!', 'success')
-        return redirect(url_for('auth.landing'))
+        return redirect(url_for('main.landing'))
     return render_template('register.html', title='rejestracja', form=form)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('auth.landing'))
+        return redirect(url_for('main.landing'))
 
     form = LoginForm()
     print(request.args.get('next'))
@@ -45,7 +37,7 @@ def login():
             login_user(user, remember=form.stay_loggedin.data)
             next_page = request.args.get('next')
             print(next_page)
-            return redirect(next_page) if next_page else redirect(url_for('auth.landing'))
+            return redirect(next_page) if next_page else redirect(url_for('main.landing'))
         else:
             flash(f'Zły email lub hasło!', 'danger')
     return render_template('login.html', title='logowanie', form=form)
@@ -53,7 +45,7 @@ def login():
 @auth.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('auth.landing'))
+    return redirect(url_for('main.landing'))
 
 
 @auth.route('/account')

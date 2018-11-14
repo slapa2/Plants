@@ -20,8 +20,10 @@ def create_app():
     bcrypt.init_app(app)
     login_manager.init_app(app)
 
+    from plants.main import main
     from plants.auth import auth
     from plants.plants import plants
+    app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(plants)
 

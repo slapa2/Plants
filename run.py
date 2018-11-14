@@ -9,4 +9,4 @@ with flask_app.app_context():
     try:
         User.creata_user('user@test.pl', 'user')
     except IntegrityError :
-        print('IntegrityError: User user@test.pl already exist')
+        pass
