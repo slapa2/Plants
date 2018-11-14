@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
-from plants.auth.models import User
+from plants.models import User
 
 class RegistrationForm(FlaskForm):
     email = StringField("Email:", validators=[DataRequired(), Email()])

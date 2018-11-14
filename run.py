@@ -1,5 +1,5 @@
 from plants import create_app, db
-from plants.auth.models import User
+from plants.models import User
 from sqlalchemy.exc import IntegrityError
 
 

@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 from plants import db, bcrypt
 from plants.auth import auth
-from plants.auth.models import User
+from plants.models import User
 from plants.auth.forms import RegistrationForm, LoginForm
 
 
