@@ -2,11 +2,24 @@
 
 {% block content %}
 
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 mb-4">Masz uwagi, pytania, propozycje - NAPISZ</h1>
-        <p class="lead">slapa02@gmail.com </p>
-      </div>
+    <div class="container">
+    	<div class=" col-12 mb-4">Masz uwagi, pytania, propozycje - NAPISZ</div>
+        <div class="col-8">
+            <form method="POST">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div>{{form.email.label}}</div>
+                <div>{{form.email.errors}}</div>
+            	<div>{{form.email}}</div>
+                <div>{{form.question.label}}</div>
+                <div>{{form.question.errors}}</div>
+            	<div>{{form.question}}</div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-success") }}
+            </div>
+        </form>
+        </div>
     </div>
 
 {% endblock content %}
