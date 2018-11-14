@@ -6,6 +6,7 @@ from plants.plants import plants
 from plants.plants.models import Plant
 from plants.plants.forms import PlantForm, PlantSearchForm
 
+
 @plants.route('/plants/catalog', methods=['GET', 'POST'])
 def plants_catalog():
     pages = 5
@@ -33,6 +34,7 @@ def add_plant():
             light_level=        form.light_level.data,
             light_description = form.light_description.data,
             water_level =       form.water_level.data,
+            spray =             form.spray.data,
             water_description = form.water_description.data,
             temperature =       form.temperature.data,
             soil =              form.soil.data,
@@ -47,6 +49,7 @@ def add_plant():
         return redirect(url_for('plants.plants_catalog'))
     return render_template('addPlant.html', form=form, title='Dodaj roślinę')
 
+
 @plants.route('/plants/edit/<plant_id>', methods=['GET', 'POST'])
 @login_required
 def edit_plant(plant_id):
@@ -59,6 +62,7 @@ def edit_plant(plant_id):
         plant.light_level = form.light_level.data
         plant.light_description = form.light_description.data
         plant.water_level = form.water_level.data
+        plant.spray = form.spray.data
         plant.water_description = form.water_description.data
         plant.temperature = form.temperature.data
         plant.soil = form.soil.data
@@ -76,6 +80,7 @@ def edit_plant(plant_id):
     form.light_level.data = plant.light_level
     form.light_description.data = plant.light_description
     form.water_level.data = plant.water_level
+    form.spray.data = plant.spray
     form.water_description.data = plant.water_description
     form.temperature.data = plant.temperature
     form.soil.data = plant.soil
