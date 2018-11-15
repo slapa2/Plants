@@ -1,31 +1,56 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
     <div class="container">
-    	<div class=" col-12 mb-4">Masz uwagi, pytania, propozycje - NAPISZ</div>
-        <div class="col-8">
-            <form method="POST">
+        <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <div>{{form.email.label}}</div>
-                <div>{{form.email.errors}}</div>
-            	<div>{{form.email}}</div>
-                <div>{{form.question.label}}</div>
-                <div>{{form.question.errors}}</div>
-            	<div>{{form.question}}</div>
+                <legend class="border-bottom mb-4">Masz uwagi, pytania, propozycje - NAPISZ</legend>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors  %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.question.label(class="form-control-label") }}
+                    {% if form.question.errors  %}
+                        {{ form.question(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.question.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.question(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.recaptcha.label(class="form-control-label") }}
+                    {% if form.recaptcha.errors  %}
+                        {{ form.recaptcha(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.recaptcha.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.recaptcha(class="form-control") }}
+                    {% endif %}
+                </div>
             </fieldset>
-            <div class="form-group">
-                {% for error in form.recaptcha.errors %}
-                    {{ error }}
-                {% endfor %}
-                {{ form.recaptcha }}
-            </div>
             <div class="form-group">
                 {{ form.submit(class="btn btn-success") }}
             </div>
         </form>
-        </div>
     </div>
 
 {% endblock content %}
