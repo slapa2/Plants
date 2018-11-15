@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, flash, redirect, url_for
 from flask_mail import Message
 from plants import mail
 from plants.main import main
@@ -18,4 +18,6 @@ def contact():
     	msg = Message('[MyPlants] - Pytanie', sender=email, recipients=['bazaroslin@gmail.com'])
     	msg.body = question
     	mail.send(msg)
+    	flash(f'Wiadomość została wysłana. Dziękujemy!', 'success')
+    	return redirect(url_for('main.contact'))
     return render_template('contact.html', title='Kontakt', form=form)
