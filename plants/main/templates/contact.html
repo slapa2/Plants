@@ -16,6 +16,12 @@
             	<div>{{form.question}}</div>
             </fieldset>
             <div class="form-group">
+                {% for error in form.recaptcha.errors %}
+                    {{ error }}
+                {% endfor %}
+                {{ form.recaptcha }}
+            </div>
+            <div class="form-group">
                 {{ form.submit(class="btn btn-success") }}
             </div>
         </form>
