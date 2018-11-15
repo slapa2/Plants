@@ -15,9 +15,7 @@ def contact():
     if form.validate_on_submit():
     	email = form.email.data
     	question = form.question.data
-
     	msg = Message('[MyPlants] - Pytanie', sender=email, recipients=['bazaroslin@gmail.com'])
     	msg.body = question
-
     	mail.send(msg)
     return render_template('contact.html', title='Kontakt', form=form)
