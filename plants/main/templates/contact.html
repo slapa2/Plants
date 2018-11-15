@@ -1,12 +1,56 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+    <div class="container">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Masz uwagi, pytania, propozycje - NAPISZ</legend>
 
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 mb-4">Masz uwagi, pytania, propozycje - NAPISZ</h1>
-        <p class="lead">slapa02@gmail.com </p>
-      </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors  %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.question.label(class="form-control-label") }}
+                    {% if form.question.errors  %}
+                        {{ form.question(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.question.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.question(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.recaptcha.label(class="form-control-label") }}
+                    {% if form.recaptcha.errors  %}
+                        {{ form.recaptcha(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.recaptcha.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.recaptcha(class="form-control") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-success") }}
+            </div>
+        </form>
     </div>
 
 {% endblock content %}
