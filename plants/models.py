@@ -53,7 +53,7 @@ class User(db.Model, UserMixin):
         self.activate = 1
         db.session.add(self)
         db.session.commit()
-        return user
+        return self
 
     def get_user_token(self):
         s = JSONWebSignatureSerializer(app.config['SECRET_KEY'])
