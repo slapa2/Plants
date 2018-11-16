@@ -40,10 +40,9 @@ Zespół MyPlants"""
 
 @auth.route('/activate/<token>', methods=['GET'])
 def activate(token):
-    print(token)
     user = User.verify_user_token(token)
     if user:
-        user.activate()
+        user.activate_user()
         flash(f'Konto {user.email} zostało aktywowane', 'success')
         return redirect(url_for('auth.login'))
     else:

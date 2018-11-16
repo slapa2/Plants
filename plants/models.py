@@ -35,7 +35,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    activate = db.Column(db.Boolean)
+    activate = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f'User (id: {self.id}, email: {self.email})'
@@ -48,7 +48,7 @@ class User(db.Model, UserMixin):
         db.session.commit()
         return user
 
-    def activate(self):
+    def activate_user(self):
         self.activate = 1
         db.session.add(self)
         db.session.commit()
