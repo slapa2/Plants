@@ -2,4 +2,5 @@
 venv/
 plants_venv/
 __pycache__/
-site.db
+*.db*
+env
