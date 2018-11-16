@@ -57,15 +57,13 @@ class User(db.Model, UserMixin):
 
     def get_user_token(self):
         s = JSONWebSignatureSerializer(app.config['SECRET_KEY'])
-        return s.dumps(self.id).decode('utf-8')
+        return s.dumps({"user_id": self.id}).decode('utf-8')
 
     @staticmethod
     def verify_user_token(token):
         s = JSONWebSignatureSerializer(app.config['SECRET_KEY'])
-        print('token:', token)
         try:
-            user_id = s.loads(token)
-            print(f'VERIFY -> user_id: {user_id}')
+            user_id = s.loads(token)['user_id']
         except:
             return None
         return User.query.get(user_id)
