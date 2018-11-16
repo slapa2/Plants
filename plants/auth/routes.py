@@ -17,6 +17,8 @@ def register():
     if form.validate_on_submit():
         hashed_pasword = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(email=form.email.data, password=hashed_pasword)
+        db.session.add(user)
+        db.session.commit()
         token = user.get_user_token()
         msg = Message('MyPlants - Aktywacj konta', sender='noreply@myplants.pl', recipients=[user.email])
         msg.body = f"""Witaj!
