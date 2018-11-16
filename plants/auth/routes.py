@@ -60,11 +60,13 @@ def login():
 
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and user.activate and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.stay_loggedin.data)
-            next_page = request.args.get('next')
-            print(next_page)
-            return redirect(next_page) if next_page else redirect(url_for('main.landing'))
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            if user.activate:
+                login_user(user, remember=form.stay_loggedin.data)
+                next_page = request.args.get('next')
+                return redirect(next_page) if next_page else redirect(url_for('main.landing'))
+            else:
+                flash(f'Konto nieaktywne! Przed zalogowaniem potwierdź adres email linkiem aktywacyjnym.', 'warning')
         else:
             flash(f'Zły email lub hasło!', 'danger')
     return render_template('login.html', title='logowanie', form=form)
