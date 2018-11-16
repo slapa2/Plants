@@ -1,10 +1,9 @@
 from datetime import datetime
-from itsdangerous import JSONWebSignatureSerializer
+from itsdangerous import TimedJSONWebSignatureSerializer
 from flask import current_app as app
 from flask_login import UserMixin
 
 from plants import db, bcrypt, login_manager
-
 
 class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -55,13 +54,13 @@ class User(db.Model, UserMixin):
         db.session.commit()
         return self
 
-    def get_user_token(self):
-        s = JSONWebSignatureSerializer(app.config['SECRET_KEY'])
+    def get_user_token(self, expires=1200):
+        s = TimedJSONWebSignatureSerializer(app.config['SECRET_KEY'], expires)
         return s.dumps({"user_id": self.id}).decode('utf-8')
 
     @staticmethod
     def verify_user_token(token):
-        s = JSONWebSignatureSerializer(app.config['SECRET_KEY'])
+        s = TimedJSONWebSignatureSerializer(app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']
         except:
