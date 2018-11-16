@@ -1,9 +1,9 @@
 from datetime import datetime
-
+from itsdangerous import TimedJSONWebSignatureSerializer
+from flask import current_app as app
 from flask_login import UserMixin
 
 from plants import db, bcrypt, login_manager
-
 
 class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,6 +35,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    activate = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f'User (id: {self.id}, email: {self.email})'
@@ -42,7 +43,28 @@ class User(db.Model, UserMixin):
     @classmethod
     def creata_user(cls, email, password):
         password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
-        user = User(email=email, password=password_hash)
+        user = User(email=email, password=password_hash, activate=False)
         db.session.add(user)
         db.session.commit()
         return user
+
+    def activate_user(self):
+        self.activate = 1
+        db.session.add(self)
+        db.session.commit()
+        return self
+
+    def get_user_token(self, expires=1200):
+        s = TimedJSONWebSignatureSerializer(app.config['SECRET_KEY'], expires)
+        return s.dumps({"user_id": self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_user_token(token):
+        s = TimedJSONWebSignatureSerializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
+
+
