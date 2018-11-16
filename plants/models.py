@@ -49,8 +49,8 @@ class User(db.Model, UserMixin):
         db.session.commit()
         return user
 
-    def activate_user(self):
-        self.activate = True
+    def activate(self):
+        self.activate = 1
         db.session.add(self)
         db.session.commit()
         return user

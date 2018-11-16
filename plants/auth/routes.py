@@ -41,6 +41,7 @@ def activate(token):
     print(token)
     user = User.verify_user_token(token)
     if user:
+        user.activate()
         flash(f'Konto {user.email} zostało aktywowane', 'success')
         return redirect(url_for('auth.login'))
     else:
