@@ -8,6 +8,6 @@ with flask_app.app_context():
     db.create_all()
     try:
         user = User.creata_user('user@test.pl', 'user')
-        user.activate()
+        user.activate_user()
     except IntegrityError :
         pass
