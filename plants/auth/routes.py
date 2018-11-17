@@ -5,7 +5,7 @@ from flask_mail import Message
 from plants import db, bcrypt, mail
 from plants.auth import auth
 from plants.models import User
-from plants.auth.forms import RegistrationForm, LoginForm, PasswordResetForm
+from plants.auth.forms import RegistrationForm, LoginForm, PasswordResetForm, PasswordChangeForm
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -15,12 +15,14 @@ def register():
 
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_pasword = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        hashed_pasword = bcrypt.generate_password_hash(
+            form.password.data).decode('utf-8')
         user = User(email=form.email.data, password=hashed_pasword)
         db.session.add(user)
         db.session.commit()
         token = user.get_user_token()
-        msg = Message('MyPlants - Aktywacj konta', sender='noreply@myplants.pl', recipients=[user.email])
+        msg = Message('MyPlants - Aktywacj konta',
+                      sender='noreply@myplants.pl', recipients=[user.email])
         msg.body = f"""Witaj!
 Aby ukończyć rejestrację w serwise otwórz poniższy link aktywacyjny:
 
@@ -37,6 +39,7 @@ Zespół MyPlants"""
         flash(f'Konto {form.email.data} zostało utworzone!<br>Potwierdz rejestrację otwiereając link aktywacyjny', 'success')
         return redirect(url_for('auth.login'))
     return render_template('register.html', title='rejestracja', form=form)
+
 
 @auth.route('/activate/<token>', methods=['GET'])
 def activate(token):
@@ -71,6 +74,7 @@ def login():
             flash(f'Zły email lub hasło!', 'danger')
     return render_template('login.html', title='logowanie', form=form)
 
+
 @auth.route('/logout')
 def logout():
     logout_user()
@@ -102,6 +106,20 @@ def reset_password():
     return render_template('password_reset.html', title='reset hasła', form=form)
 
 
-@auth.route('/change_password', methods=['GET', 'POST'])
-def change_password():
-    pass
+@auth.route('/change_password/<token>', methods=['GET', 'POST'])
+def change_password(token=None):
+    form = PasswordChangeForm()
+    user = User.verify_user_token(token)
+    if user:
+        if form.validate_on_submit():
+            user.password = hashed_pasword = bcrypt.generate_password_hash(
+                form.password.data).decode('utf-8')
+            user.activate = True
+            db.session.add(user)
+            db.session.commit()
+            flash(f'Nowe hasło zostało zapisane', 'success')
+            return redirect(url_for('auth.login'))
+        return render_template('password_change.html', title='zmiana hasła', form=form)
+    else:
+        flash(f'Błąd resetu hasła', 'danger')
+        return redirect(url_for('main.landing'))
