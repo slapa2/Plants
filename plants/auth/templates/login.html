@@ -45,7 +45,7 @@
                 {{ form.submit(class="btn btn-success") }}
             </div>
             <small class="text-muted ml-2">
-                <a href="#">Zapomiałeś hasła?</a>
+                <a href="{{ url_for('auth.reset_password') }}">Zapomiałeś hasła?</a>
             </small>
         </form>
     </div>

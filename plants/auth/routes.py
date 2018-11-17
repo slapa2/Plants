@@ -5,7 +5,7 @@ from flask_mail import Message
 from plants import db, bcrypt, mail
 from plants.auth import auth
 from plants.models import User
-from plants.auth.forms import RegistrationForm, LoginForm
+from plants.auth.forms import RegistrationForm, LoginForm, PasswordResetForm
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -82,3 +82,26 @@ def logout():
 def account():
     return render_template('account.html', title='profil')
 
+
+@auth.route('/reset_passwoerd', methods=['GET', 'POST'])
+def reset_password():
+    form = PasswordResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            token = user.get_user_token()
+            msg = Message('MyPlants - Reset hasła', recipients=[user.email])
+            msg.html = f"""
+            <h4>Aby zresetować hasło do MyPlants otwórz poniższy link</h4>
+            <p>{url_for('auth.change_password', token=token, _external=True)}</p>
+            <p>Jeśli nie wiesz o co chodzi zignoruj tą wiadomość
+            """
+            mail.send(msg)
+        flash(f'Jeśli masz u nas konto otrzymasz link do resetu hasła', 'info')
+        return redirect(url_for('main.landing'))
+    return render_template('password_reset.html', title='reset hasła', form=form)
+
+
+@auth.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    pass
