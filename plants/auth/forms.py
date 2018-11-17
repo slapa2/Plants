@@ -24,4 +24,5 @@ class LoginForm(FlaskForm):
 
 class PasswordResetForm(FlaskForm):
     email = StringField("Email:", validators=[DataRequired(), Email()])
+    recaptcha = RecaptchaField()
     submit = SubmitField("Reset hasła")
