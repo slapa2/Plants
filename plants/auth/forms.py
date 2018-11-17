@@ -5,9 +5,11 @@ from flask_wtf.recaptcha import RecaptchaField
 
 from plants.models import User
 
+
 class RegistrationForm(FlaskForm):
     email = StringField("Email:", validators=[DataRequired(), Email()])
-    password = PasswordField('Hasło:', validators=[DataRequired(), EqualTo('confirm')])
+    password = PasswordField('Hasło:', validators=[
+                             DataRequired(), EqualTo('confirm')])
     confirm = PasswordField('Powtórz hasło:', validators=[DataRequired()])
     recaptcha = RecaptchaField()
     submit = SubmitField("Zarejestruj")
@@ -16,8 +18,22 @@ class RegistrationForm(FlaskForm):
         if User.query.filter_by(email=email.data).first():
             raise ValidationError(f'Użytkownik: {email.data} już istnieje')
 
+
 class LoginForm(FlaskForm):
     email = StringField("Email:", validators=[DataRequired(), Email()])
     password = PasswordField("Hasło:", validators=[DataRequired()])
     stay_loggedin = BooleanField("Zapamiętaj mnie")
     submit = SubmitField('Zaloguj')
+
+
+class PasswordResetForm(FlaskForm):
+    email = StringField("Email:", validators=[DataRequired(), Email()])
+    recaptcha = RecaptchaField()
+    submit = SubmitField("Reset hasła")
+
+
+class PasswordChangeForm(FlaskForm):
+    password = PasswordField('Hasło:', validators=[
+                             DataRequired(), EqualTo('confirm')])
+    confirm = PasswordField('Powtórz hasło:', validators=[DataRequired()])
+    submit = SubmitField("Zapisz")

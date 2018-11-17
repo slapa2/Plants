@@ -5,6 +5,7 @@ from flask_login import UserMixin
 
 from plants import db, bcrypt, login_manager
 
+
 class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     polish_name = db.Column(db.String(50), unique=True)
@@ -19,16 +20,17 @@ class Plant(db.Model):
     fertilizing = db.Column(db.Text)
     transplanting = db.Column(db.Text)
     multiplication = db.Column(db.Text)
-    image = db.Column(db.Text, nullable=False, default="../static/img/plant.png")
+    image = db.Column(db.Text, nullable=False,
+                      default="../static/img/plant.png")
 
     def __repr__(self):
         return f'Plant {self.polish_name} {self.latin_name}'
 
 
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 class User(db.Model, UserMixin):
 
@@ -66,5 +68,3 @@ class User(db.Model, UserMixin):
         except:
             return None
         return User.query.get(user_id)
-
-
