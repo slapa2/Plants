@@ -15,8 +15,8 @@ def contact():
     if form.validate_on_submit():
     	email = form.email.data
     	question = form.question.data
-    	msg = Message('[MyPlants] - Pytanie', sender=email, recipients=['bazaroslin@gmail.com'])
-    	msg.body = question
+    	msg = Message('[MyPlants] - Pytanie', recipients=['bazaroslin@gmail.com'])
+    	msg.html = f'<h4>email: {email}</h4><p>{question}</p>'
     	mail.send(msg)
     	flash(f'Wiadomość została wysłana. Dziękujemy!', 'success')
     	return redirect(url_for('main.contact'))
