@@ -22,6 +22,6 @@ class LoginForm(FlaskForm):
     stay_loggedin = BooleanField("Zapamiętaj mnie")
     submit = SubmitField('Zaloguj')
 
-class PasswordReset(FlaskForm):
+class PasswordResetForm(FlaskForm):
     email = StringField("Email:", validators=[DataRequired(), Email()])
     submit = SubmitField("Reset hasła")
