@@ -1,6 +1,7 @@
 .idea/*
 venv/
 plants_venv/
+venv_plants/
 __pycache__/
 *.db*
 env
