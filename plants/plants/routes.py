@@ -7,7 +7,7 @@ from plants.models import Plant
 from plants.plants.forms import PlantForm, PlantSearchForm
 
 
-@plants.route('/plants/catalog', methods=['GET', 'POST'])
+@plants.route('/plants', methods=['GET', 'POST'])
 def plants_catalog():
     pages = 5
 
