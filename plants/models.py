@@ -49,6 +49,7 @@ class User(db.Model, UserMixin):
     def creata_user(cls, email, password):
         password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
         user = User(email=email, password=password_hash, activate=False)
+        user.roles.append(Role.query.get(1))
         db.session.add(user)
         db.session.commit()
         return user
