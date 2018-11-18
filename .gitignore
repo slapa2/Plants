@@ -5,3 +5,5 @@ venv_plants/
 __pycache__/
 *.db*
 env
+*.sublime-project
+*.sublime-workspace
