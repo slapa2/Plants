@@ -67,7 +67,7 @@ def login():
             if user.activate:
                 login_user(user, remember=form.stay_loggedin.data)
                 next_page = request.args.get('next')
-                return redirect(next_page) if next_page else redirect(url_for('main.landing'))
+                return redirect(next_page or url_for('main.landing'))
             else:
                 flash(f'Konto nieaktywne! Przed zalogowaniem potwierdź adres email linkiem aktywacyjnym.', 'warning')
         else:
