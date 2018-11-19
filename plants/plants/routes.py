@@ -1,3 +1,5 @@
+from functools import wraps
+
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 
@@ -6,8 +8,10 @@ from plants.plants import plants
 from plants.models import Plant
 from plants.plants.forms import PlantForm, PlantSearchForm
 
+from plants.helpers import requires_access_level
 
-@plants.route('/plants/catalog', methods=['GET', 'POST'])
+
+@plants.route('/plants', methods=['GET', 'POST'])
 def plants_catalog():
     pages = 5
 
@@ -25,6 +29,7 @@ def plants_catalog():
 
 @plants.route('/plants/add', methods=['GET', 'POST'])
 @login_required
+@requires_access_level(['admin'])
 def add_plant():
     form = PlantForm()
     if form.validate_on_submit():
@@ -52,6 +57,7 @@ def add_plant():
 
 @plants.route('/plants/edit/<plant_id>', methods=['GET', 'POST'])
 @login_required
+@requires_access_level(['admin'])
 def edit_plant(plant_id):
 
     plant = Plant.query.get(plant_id)
