@@ -9,8 +9,8 @@ class PlantForm(FlaskForm):
     polish_name = StringField('Nazwa:', validators=[DataRequired()])
     latin_name = StringField('Nazwa łacińska:', validators=[])
 
-    light_level = SelectField('Poziom światła:', coerce=int, choices=[(0,0),(1,1),(2,2),(3,3),(4,4),(5,5)])
-    water_level = SelectField('Ilość wody:', coerce=int, choices=[(0,0),(1,1),(2,2),(3,3),(4,4),(5,5)])
+    light_level = SelectField('Poziom światła:', coerce=int, choices=[(0,0),(1,1),(2,2),(3,3)])
+    water_level = SelectField('Ilość wody:', coerce=int, choices=[(0,0),(1,1),(2,2),(3,3)])
     spray = BooleanField('Spryskiwać:')
 
     light_description = StringField('Opis stanowiska:', validators=[], widget=TextArea())
