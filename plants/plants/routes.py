@@ -24,7 +24,8 @@ def plants_catalog():
             paginate(page=page, per_page=pages)
     else:
         ret = Plant.query.paginate(page=page, per_page=pages)
-    return render_template('plants.html', title='baza roślin', plants_list=ret, search_form=search_form)
+    return render_template('plants.html', title='baza roślin',
+                           plants_list=ret, search_form=search_form)
 
 
 @plants.route('/plants/add', methods=['GET', 'POST'])
@@ -34,23 +35,25 @@ def add_plant():
     form = PlantForm()
     if form.validate_on_submit():
         plant = Plant(
-            polish_name=        form.polish_name.data,
-            latin_name=         form.latin_name.data,
-            light_level=        form.light_level.data,
-            light_description = form.light_description.data,
-            water_level =       form.water_level.data,
-            spray =             form.spray.data,
-            water_description = form.water_description.data,
-            temperature =       form.temperature.data,
-            soil =              form.soil.data,
-            fertilizing =       form.fertilizing.data,
-            transplanting =     form.transplanting.data,
-            multiplication =    form.multiplication.data,
+            polish_name=form.polish_name.data,
+            latin_name=form.latin_name.data,
+            light_level=form.light_level.data,
+            light_description=form.light_description.data,
+            water_level=form.water_level.data,
+            spray=form.spray.data,
+            water_description=form.water_description.data,
+            temperature=form.temperature.data,
+            soil=form.soil.data,
+            fertilizing=form.fertilizing.data,
+            transplanting=form.transplanting.data,
+            multiplication=form.multiplication.data,
             image=form.image.data)
 
         db.session.add(plant)
         db.session.commit()
-        flash(f'Roślina {form.polish_name.data} została dodana do bazy!', 'success')
+        flash(
+            f'Roślina {form.polish_name.data} została dodana do bazy!',
+             'success')
         return redirect(url_for('plants.plants_catalog'))
     return render_template('addPlant.html', form=form, title='Dodaj roślinę')
 
@@ -75,10 +78,15 @@ def edit_plant(plant_id):
         plant.fertilizing = form.fertilizing.data
         plant.transplanting = form.transplanting.data
         plant.multiplication = form.multiplication.data
-        plant.image = form.image.data
+        if form.image.data:
+            plant.image = form.image.data
+        else:
+            plant.image = '../static/img/plant.png'
 
         db.session.commit()
-        flash(f'Roślina {form.polish_name.data} została uaktualniona!', 'success')
+        flash(
+            f'Roślina {form.polish_name.data} została uaktualniona!',
+            'success')
         return redirect(url_for('plants.plants_catalog'))
 
     form.polish_name.data = plant.polish_name
@@ -101,4 +109,4 @@ def edit_plant(plant_id):
 @plants.route('/plants/<plant_id>')
 def plant_info(plant_id):
     plant = Plant.query.get(plant_id)
-    return render_template('plant.html', title=plant.polish_name , plant=plant)
+    return render_template('plant.html', title=plant.polish_name, plant=plant)
