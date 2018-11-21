@@ -71,42 +71,44 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="row card-body">
-                    <div class="col-3 text-center">
-                        <img class="card-img-top plant-icon"
-                             src="{{ plant.image }}" alt="Card image cap">
-                    </div>
-                    <div class="col-3 card-text h3">
-                        <div class="card-text text-center pt-4">
-                            <div>
-                                {% for sun in range(plant.light_level) %}
-                                    <i class="fas fa-sun level-icon level-icon-sun"></i>
-                                {% endfor %}
-                                {% for sun in range(5 - plant.light_level) %}
-                                    <i class="fas fa-sun level-icon level-icon-grey"></i>
-                                {% endfor %}
-                            </div>
-                            <div class="mt-2">
-                                {% for sun in range(plant.water_level) %}
-                                    <i class="level-icon level-icon-tint fas fa-tint "></i>
-                                {% endfor %}
-                                {% for sun in range(5 - plant.water_level) %}
-                                    <i class="fas fa-tint level-icon level-icon-grey"></i>
-                                {% endfor %}
-                            </div>
-                            <div class="text-center mt-4" >
-                                {% if plant.spray == True %}
-                                    <img src="/static/img/sprayer-green.png" class="">
-                                {% else %}
-                                    <img src="/static/img/sprayer-grey.png" class="">
-                                {% endif %}
+                <a class="card-link" href="{{ url_for('plants.plant_info',plant_id=plant.id) }}">
+                    <div class="row card-body">
+                        <div class="col-3 text-center">
+                            <img class="card-img-top plant-icon"
+                                 src="{{ plant.image }}" alt="Card image cap">
+                        </div>
+                        <div class="col-3 card-text h3">
+                            <div class="card-text text-center pt-4">
+                                <div>
+                                    {% for sun in range(plant.light_level) %}
+                                        <i class="fas fa-sun level-icon level-icon-sun"></i>
+                                    {% endfor %}
+                                    {% for sun in range(5 - plant.light_level) %}
+                                        <i class="fas fa-sun level-icon level-icon-grey"></i>
+                                    {% endfor %}
+                                </div>
+                                <div class="mt-2">
+                                    {% for sun in range(plant.water_level) %}
+                                        <i class="level-icon level-icon-tint fas fa-tint "></i>
+                                    {% endfor %}
+                                    {% for sun in range(5 - plant.water_level) %}
+                                        <i class="fas fa-tint level-icon level-icon-grey"></i>
+                                    {% endfor %}
+                                </div>
+                                <div class="text-center mt-4" >
+                                    {% if plant.spray == True %}
+                                        <img src="/static/img/sprayer-green.png" class="">
+                                    {% else %}
+                                        <img src="/static/img/sprayer-grey.png" class="">
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
+                        <div class="col-6 card-text pt-4">
+                            <p class="h5">{{ plant.light_description }}</p>
+                        </div>
                     </div>
-                    <div class="col-6 card-text pt-4">
-                        <p class="h5">{{ plant.light_description }}</p>
-                    </div>
-                </div>
+                </a>
 
             </div>
         {% endfor %}
