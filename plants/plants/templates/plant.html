@@ -30,7 +30,7 @@
                                 {% for sun in range(plant.light_level) %}
                                     <i class="fas fa-sun level-icon level-icon-sun"></i>
                                 {% endfor %}
-                                {% for sun in range(5 - plant.light_level) %}
+                                {% for sun in range(3 - plant.light_level) %}
                                     <i class="fas fa-sun level-icon level-icon-grey"></i>
                                 {% endfor %}
                             </div>
@@ -38,7 +38,7 @@
                                 {% for sun in range(plant.water_level) %}
                                     <i class="level-icon level-icon-tint fas fa-tint "></i>
                                 {% endfor %}
-                                {% for sun in range(5 - plant.water_level) %}
+                                {% for sun in range(3 - plant.water_level) %}
                                     <i class="fas fa-tint level-icon level-icon-grey"></i>
                                 {% endfor %}
                             </div>
